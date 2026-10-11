@@ -97,9 +97,9 @@ section{padding-block:clamp(44px,6vw,88px);position:relative}
 
 /* stats */
 .stats{padding-block:0 clamp(40px,6vw,80px);margin-top:-8px}
-.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-.stat{padding:26px 24px 26px 0;border-top:1px solid var(--line)}
-.stat+.stat{padding-left:24px;border-left:1px solid var(--line)}
+.stats .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.stat{padding:26px 28px 26px 0;border-top:1px solid var(--line)}
+.stat+.stat{padding-left:28px;border-left:1px solid var(--line)}
 .stat b{display:block;font:600 clamp(52px,6.4vw,96px)/.9 var(--display);letter-spacing:-.055em;font-variant-numeric:tabular-nums}
 .stat b i{font-style:normal;color:var(--accent)}
 .stat>span{display:block;margin-top:10px;color:var(--muted);max-width:26ch}
@@ -326,9 +326,8 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
   .vz-c:nth-child(n+26){display:none}
   .hero{grid-template-rows:auto auto;align-items:start}
   .hero-copy{padding-block:104px 8px}
-  .stats .wrap{grid-template-columns:1fr 1fr}
-  .stat,.stat+.stat{padding:22px 16px 22px 0;border-left:0}
-  .stat:nth-child(even){padding-left:16px;border-left:1px solid var(--line)}
+  .stats .wrap{grid-template-columns:1fr}
+  .stat,.stat+.stat{padding:22px 0;border-left:0}
   .plats{grid-template-columns:repeat(3,1fr)}
   .two-col,.two,.panel{grid-template-columns:1fr;gap:36px}
   .xp{grid-template-columns:1fr 1fr}
@@ -383,10 +382,9 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
 
   <div class="stats">
     <div class="wrap">
-      <div class="stat rv"><b><span data-n="5">5</span><i>+</i></b><span>years building integrations, since 2021</span></div>
-      <div class="stat rv" style="--d:.07s"><b><span data-n="300">300</span><i>+</i></b><span>integrations shipped across CRM, accounting and marketing</span></div>
-      <div class="stat rv" style="--d:.14s"><b><span data-n="500">500</span><i>+</i></b><span>APIs explored in discovery and delivery</span></div>
-      <div class="stat rv" style="--d:.21s"><b><span data-n="4">4</span></b><span>production AI agents built for lead discovery, research and outreach</span></div>
+      <div class="stat rv"><b><span data-n="300">300</span><i>+</i></b><span>integrations shipped across CRM, accounting and marketing</span></div>
+      <div class="stat rv" style="--d:.1s"><b><span data-n="500">500</span><i>+</i></b><span>APIs explored in discovery and delivery</span></div>
+      <div class="stat rv" style="--d:.2s"><b><span data-n="5">5</span><i>+</i></b><span>years building integrations, since 2021</span></div>
     </div>
   </div>
 
