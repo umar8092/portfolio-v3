@@ -105,16 +105,12 @@ section{padding-block:clamp(44px,6vw,88px);position:relative}
 .stat>span{display:block;margin-top:10px;color:var(--muted);max-width:26ch}
 
 /* platforms */
-.plats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.plats{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
 .pcard{background:#fff;border:1px solid var(--line);border-radius:24px;min-height:150px;display:grid;grid-template-rows:1fr auto;justify-items:center;align-items:center;padding:26px 18px 18px;text-decoration:none;color:#0B0E13;transition:transform .35s var(--ease),border-color .25s,box-shadow .3s}
 .pcard:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 18px 38px -18px var(--accent)}
 .pcard img{width:calc(var(--w)*1px);height:auto;max-width:100%;object-fit:contain}
 .pc{margin-top:18px;font-family:var(--mono);font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:#566070}
 .pc b{color:#C2410C;font-weight:500}
-.also{display:flex;align-items:center;gap:14px;margin-top:18px;color:var(--muted);font-size:15px;flex-wrap:wrap}
-.palso{display:inline-flex;align-items:center;gap:12px;height:54px;padding:0 20px;border-radius:999px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .25s,transform .3s var(--ease)}
-.palso:hover{border-color:var(--accent);transform:translateY(-2px)}
-.palso img{height:24px;width:auto}
 .plchip{display:inline-flex;align-items:center;background:#fff;border-radius:999px;padding:3px 10px;margin-left:2px;vertical-align:middle}
 .plchip img{height:13px;width:auto}
 
@@ -392,10 +388,9 @@ footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);fo
     <div class="wrap">
       <div class="head rv">
         <h2>Platforms I build on</h2>
-        <p>Production work shipped on each of these. Open one to see its case studies. Custom code in Python and SQL when a platform is not the right fit.</p>
+        <p>The workflow builders I use to ship integrations and AI agents. Open one to see its case studies. Custom code in Python and SQL when a platform is not the right fit.</p>
       </div>
       <div class="plats rv" id="plats"></div>
-      <div class="also rv" id="also"></div>
     </div>
   </section>
 
@@ -514,11 +509,9 @@ label();
 /* platforms band: ranked by shipped case studies; logos sized optically so no wordmark dominates */
 const PLAT = { n8n: ["n8n", "https://n8n.io", 116], zapier: ["Zapier", "https://zapier.com", 108], make: ["Make", "https://www.make.com", 124], integry: ["Integry", "https://integry.ai", 124], squig: ["Squig", "https://squig.com", 92], gohighlevel: ["GoHighLevel", "https://www.gohighlevel.com", 136] };
 const PF = DATA.PROJECTS, used = k => PF.filter(p => (p.on || []).includes(k));
-const ranked = Object.keys(PLAT).filter(k => used(k).length).sort((a, b) => used(b).length - used(a).length);
-$("#plats").innerHTML = ranked.map(k => `<a class="pcard" href="#projects" data-pf="${k}" aria-label="${PLAT[k][0]}, ${used(k).length} case studies"><img src="assets/platforms/${k}.webp" alt="${PLAT[k][0]}" style="--w:${PLAT[k][2]}"><span class="pc"><b>${used(k).length}</b> case studies</span></a>`).join("");
-const rest = Object.keys(PLAT).filter(k => !used(k).length);
-$("#also").innerHTML = rest.length ? `<span>Also works with</span>${rest.map(k => `<a class="palso" href="${PLAT[k][1]}" target="_blank" rel="noopener" aria-label="${PLAT[k][0]}"><img src="assets/platforms/${k}.webp" alt="${PLAT[k][0]}"></a>`).join("")}` : "";
-$("#plats").addEventListener("click", e => { const c = e.target.closest(".pcard"); if (!c) return; e.preventDefault(); show(used(c.dataset.pf)[0].id); $("#stage").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" }); });
+const ranked = Object.keys(PLAT).sort((a, b) => used(b).length - used(a).length);
+$("#plats").innerHTML = ranked.map(k => { const n = used(k).length; return `<a class="pcard" href="${n ? "#projects" : PLAT[k][1]}" ${n ? "" : 'target="_blank" rel="noopener"'} data-pf="${k}" aria-label="${PLAT[k][0]}${n ? `, ${n} case studies` : ", website"}"><img src="assets/platforms/${k}.webp" alt="${PLAT[k][0]}" style="--w:${PLAT[k][2]}"><span class="pc">${n ? `<b>${n}</b> case studies` : "Also used"}</span></a>`; }).join("");
+$("#plats").addEventListener("click", e => { const c = e.target.closest(".pcard"); if (!c || !used(c.dataset.pf).length) return; e.preventDefault(); show(used(c.dataset.pf)[0].id); $("#stage").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" }); });
 
 /* projects: picker + flow graph */
 const P = DATA.PROJECTS, pick = $("#pick"), stage = $("#stage");
